@@ -2,14 +2,14 @@ require 'formula'
 
 class ArmNoneEabiGcc < Formula
   homepage 'http://www.gnu.org/software/gcc/gcc.html'
-  url 'http://ftpmirror.gnu.org/gcc/gcc-4.9.1/gcc-4.9.1.tar.bz2'
-  mirror 'ftp://gcc.gnu.org/pub/gcc/releases/gcc-4.9.1/gcc-4.9.1.tar.bz2'
-  sha1 '3f303f403053f0ce79530dae832811ecef91197e'
+  url 'http://ftpmirror.gnu.org/gcc/gcc-5.3.0/gcc-5.3.0.tar.bz2'
+  mirror 'ftp://gcc.gnu.org/pub/gcc/releases/gcc-5.3.0/gcc-5.3.0.tar.bz2'
+  sha256 'b84f5592e9218b73dbae612b5253035a7b34a9a1f7688d2e1bfaaf7267d5c4db'
 
   # http://sourceware.org/newlib/
   resource 'newlib' do
-    url 'ftp://sourceware.org/pub/newlib/newlib-2.1.0.tar.gz'
-    sha1 '364d569771866bf55cdbd1f8c4a6fa5c9cf2ef6c'
+    url 'ftp://sourceware.org/pub/newlib/newlib-2.3.0.20160104.tar.gz'
+    sha256 'c92a0e02904bd4fbe1dd416ed94e786c66afbaeae484e4c26be8bb7c7c1e4cd1'
   end
 
   depends_on 'gmp'
@@ -24,37 +24,6 @@ class ArmNoneEabiGcc < Formula
 
   def install
     resource('newlib').stage do
-      # Reported and fixed upstream
-      # http://comments.gmane.org/gmane.comp.lib.newlib/8879
-      Patch.create(:p1, <<EOL).apply
-diff --git a/libgloss/arm/configure b/libgloss/arm/configure
-index cc7e570..bdd4b13 100644
---- a/libgloss/arm/configure
-+++ b/libgloss/arm/configure
-@@ -2551,7 +2551,7 @@ esac
-
-
-
--host_makefile_frag=${srcdir}/../config/default.mh
-+host_makefile_frag=`cd $srcdir/../config;pwd`/default.mh
-
- host_makefile_frag_path=$host_makefile_frag
-
-diff --git a/libgloss/arm/configure.in b/libgloss/arm/configure.in
-index d617f49..f9409ca 100644
---- a/libgloss/arm/configure.in
-+++ b/libgloss/arm/configure.in
-@@ -59,7 +59,8 @@ esac
-
- AC_SUBST(objtype)
-
--host_makefile_frag=${srcdir}/../config/default.mh
-+host_makefile_frag=`cd $srcdir/../config;pwd`/default.mh
-+
-
- dnl We have to assign the same value to other variables because autoconf
- dnl doesn't provide a mechanism to substitute a replacement keyword with
-EOL
       (buildpath).install Dir['newlib', 'libgloss']
     end
 
