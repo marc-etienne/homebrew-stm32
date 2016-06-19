@@ -22,6 +22,11 @@ class ArmNoneEabiGcc < Formula
 
   option 'disable-cxx', 'Don\'t build the g++ compiler'
 
+  patch do
+    url "https://projects.archlinux.org/svntogit/community.git/plain/trunk/enable-with-multilib-list-for-arm.patch?h=packages/arm-none-eabi-gcc&id=b8718ed4f7eabe7125419f8c4e4e89a98ca85950"
+    sha256 "ee8c74097c1ff01918bda9acf9b45783fd3ba3a4c493e9e9255fa3c2130bf690"
+  end
+
   def install
     resource('newlib').stage do
       (buildpath).install Dir['newlib', 'libgloss']
@@ -41,6 +46,7 @@ class ArmNoneEabiGcc < Formula
 
             "--enable-multilib",
             "--enable-interwork",
+            "--with-multilib-list=armv6-m,armv7-m,armv7e-m,armv7-r,armv7-a",
             "--enable-languages=#{languages.join(',')}",
             "--with-gnu-as",
             "--with-gnu-ld",
