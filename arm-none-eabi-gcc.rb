@@ -85,5 +85,14 @@ class ArmNoneEabiGcc < Formula
 
     # stdcxx's python helpers may conflict with native gcc
     (share + "gcc-#{version}/python").rmtree
+
+    lib_paths = `#{prefix}/bin/arm-none-eabi-gcc -print-multi-lib`
+    lib_paths.each_line.map { |line| line.split(";").first }.each do |lib_path|
+      cd prefix/"arm-none-eabi/lib/#{lib_path}" do
+        ["libc", "libg", "librdimon"].each do |lib_name|
+          ln_s "#{lib_name}.a", "#{lib_name}_nano.a"
+        end
+      end
+    end
   end
 end
