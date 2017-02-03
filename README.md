@@ -7,12 +7,10 @@ Moreover, it does not use any prebuilt package such as those found at https://la
 
 Current Versions
 ----------------
-- gcc 4.9.1
-- binutils 2.24.0
-- newlib 2.1.0
+- gcc 5.3.0
+- binutils 2.25
+- newlib 2.3.0
 
 Installing Homebrew-stm32 Formulae
 --------------------------------
-Just `brew tap plietar/stm32` and then `brew install <formula>`.
-
-
+Just `brew tap marc-etienne/stm32` and then `brew install <formula>`.
