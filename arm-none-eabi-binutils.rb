@@ -1,10 +1,13 @@
-require 'formula'
-
 class ArmNoneEabiBinutils < Formula
-  homepage 'http://www.gnu.org/software/binutils/binutils.html'
-  url 'http://ftpmirror.gnu.org/binutils/binutils-2.25.tar.gz'
-  mirror 'http://ftp.gnu.org/gnu/binutils/binutils-2.25.tar.gz'
-  sha256 'cccf377168b41a52a76f46df18feb8f7285654b3c1bd69fc8265cb0fc6902f2d'
+  desc "FSF/GNU ld, ar, readelf, etc. for the ARM EABI development"
+  homepage "https://www.gnu.org/software/binutils/binutils.html"
+  head "git://sourceware.org/git/binutils-gdb.git"
+
+  stable do
+    url "https://ftp.gnu.org/gnu/binutils/binutils-2.29.1.tar.xz"
+    mirror "https://ftpmirror.gnu.org/gnu/binutils/binutils-2.29.1.tar.xz"
+    sha256 "e7010a46969f9d3e53b650a518663f98a5dde3c3ae21b7d71e5e6803bc36b577"
+  end
 
   def install
     args = ["--disable-debug",
@@ -17,13 +20,17 @@ class ArmNoneEabiBinutils < Formula
             "--disable-nls",
             "--enable-multilib"]
 
-    mkdir 'build' do
+    mkdir "build" do
       system "../configure", *args
 
       system "make"
-      system "make install"
+      system "make", "install"
     end
+    # info files conflict with native binutils
+    info.rmtree
+  end
 
-    info.rmtree # info files conflict with native binutils
+  test do
+    system "#{bin}/arm-none-eabi-ar", "-h"
   end
 end
