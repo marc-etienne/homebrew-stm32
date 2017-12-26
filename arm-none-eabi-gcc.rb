@@ -26,6 +26,17 @@ class ArmNoneEabiGcc < Formula
     sha256 "ee8c74097c1ff01918bda9acf9b45783fd3ba3a4c493e9e9255fa3c2130bf690"
   end
 
+  # Fix build with Xcode 9
+  # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=82091
+  # Taken from homebrew-core/gcc@5:
+  # https://github.com/homebrew/homebrew-core/blob/7bdcecbdcd9a9f87fd619c6fea16c32b1480e5cb/Formula/gcc@5.rb#L66
+  if DevelopmentTools.clang_build_version >= 900
+    patch do
+      url "https://raw.githubusercontent.com/Homebrew/formula-patches/078797f1b9/gcc%405/xcode9.patch"
+      sha256 "e1546823630c516679371856338abcbab381efaf9bd99511ceedcce3cf7c0199"
+    end
+  end
+
   def install
     resource('newlib').stage do
       (buildpath).install Dir['newlib', 'libgloss']
