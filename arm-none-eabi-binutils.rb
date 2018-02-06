@@ -2,9 +2,9 @@ require 'formula'
 
 class ArmNoneEabiBinutils < Formula
   homepage 'http://www.gnu.org/software/binutils/binutils.html'
-  url 'http://ftpmirror.gnu.org/binutils/binutils-2.25.tar.gz'
-  mirror 'http://ftp.gnu.org/gnu/binutils/binutils-2.25.tar.gz'
-  sha256 'cccf377168b41a52a76f46df18feb8f7285654b3c1bd69fc8265cb0fc6902f2d'
+  url 'https://ftpmirror.gnu.org/binutils/binutils-2.30.tar.gz'
+  mirror 'https://ftp.gnu.org/gnu/binutils/binutils-2.30.tar.gz'
+  sha256 '8c3850195d1c093d290a716e20ebcaa72eda32abf5e3d8611154b39cff79e9ea'
 
   def install
     args = ["--disable-debug",
