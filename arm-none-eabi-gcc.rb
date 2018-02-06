@@ -37,6 +37,17 @@ class ArmNoneEabiGcc < Formula
     end
   end
 
+  # Fix parallel build on APFS filesystem
+  # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=81797
+  # Taken from homebrew-core/gcc:
+  # https://github.com/Homebrew/homebrew-core/blob/dc0c6aa82e15ec88b75b91d1760b1f0e6230c899/Formula/gcc.rb#L62
+  if MacOS.version >= :high_sierra
+    patch do
+      url "https://raw.githubusercontent.com/Homebrew/formula-patches/df0465c02a/gcc/apfs.patch"
+      sha256 "f7772a6ba73f44a6b378e4fe3548e0284f48ae2d02c701df1be93780c1607074"
+    end
+  end
+
   def install
     resource('newlib').stage do
       (buildpath).install Dir['newlib', 'libgloss']
