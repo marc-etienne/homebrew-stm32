@@ -126,4 +126,9 @@ class ArmNoneEabiGcc < Formula
       end
     end
   end
+
+  test do
+    (testpath/"noop.c").write "void _start() {}"
+    system "#{bin}/arm-none-eabi-gcc", "-o", "noop", "-nostartfiles", "noop.c"
+  end
 end
