@@ -7,7 +7,7 @@ Moreover, it does not use any prebuilt package such as those found at https://la
 
 Current Versions
 ----------------
-- gcc 5.3.0
+- gcc 7.3.0
 - binutils 2.30
 - newlib 2.3.0
 

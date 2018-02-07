@@ -2,9 +2,9 @@ require 'formula'
 
 class ArmNoneEabiGcc < Formula
   homepage 'http://www.gnu.org/software/gcc/gcc.html'
-  url 'http://ftpmirror.gnu.org/gcc/gcc-5.3.0/gcc-5.3.0.tar.bz2'
-  mirror 'ftp://gcc.gnu.org/pub/gcc/releases/gcc-5.3.0/gcc-5.3.0.tar.bz2'
-  sha256 'b84f5592e9218b73dbae612b5253035a7b34a9a1f7688d2e1bfaaf7267d5c4db'
+  url 'https://ftpmirror.gnu.org/gcc/gcc-7.3.0/gcc-7.3.0.tar.xz'
+  mirror 'https://gcc.gnu.org/pub/gcc/releases/gcc-7.3.0/gcc-7.3.0.tar.xz'
+  sha256 '832ca6ae04636adbb430e865a1451adf6979ab44ca1c8374f61fba65645ce15c'
 
   # http://sourceware.org/newlib/
   resource 'newlib' do
@@ -22,19 +22,8 @@ class ArmNoneEabiGcc < Formula
   option 'disable-cxx', 'Don\'t build the g++ compiler'
 
   patch do
-    url "https://projects.archlinux.org/svntogit/community.git/plain/trunk/enable-with-multilib-list-for-arm.patch?h=packages/arm-none-eabi-gcc&id=b8718ed4f7eabe7125419f8c4e4e89a98ca85950"
-    sha256 "ee8c74097c1ff01918bda9acf9b45783fd3ba3a4c493e9e9255fa3c2130bf690"
-  end
-
-  # Fix build with Xcode 9
-  # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=82091
-  # Taken from homebrew-core/gcc@5:
-  # https://github.com/homebrew/homebrew-core/blob/7bdcecbdcd9a9f87fd619c6fea16c32b1480e5cb/Formula/gcc@5.rb#L66
-  if DevelopmentTools.clang_build_version >= 900
-    patch do
-      url "https://raw.githubusercontent.com/Homebrew/formula-patches/078797f1b9/gcc%405/xcode9.patch"
-      sha256 "e1546823630c516679371856338abcbab381efaf9bd99511ceedcce3cf7c0199"
-    end
+    url "https://git.archlinux.org/svntogit/community.git/plain/trunk/enable-with-multilib-list-for-arm.patch?h=packages/arm-none-eabi-gcc&id=4a12b574e51d8f0be69feb5e37986ca828eaca04"
+    sha256 "9447a8fd40d7c1e238b8e9790b739492de5feaa489d61f4ecdab863e5ea1975a"
   end
 
   # Fix parallel build on APFS filesystem
