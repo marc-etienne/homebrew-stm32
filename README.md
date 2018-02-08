@@ -9,7 +9,7 @@ Current Versions
 ----------------
 - gcc 7.3.0
 - binutils 2.30
-- newlib 2.3.0
+- newlib 3.0.0
 
 Installing Homebrew-stm32 Formulae
 --------------------------------

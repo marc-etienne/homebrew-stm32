@@ -6,10 +6,20 @@ class ArmNoneEabiGcc < Formula
   mirror 'https://gcc.gnu.org/pub/gcc/releases/gcc-7.3.0/gcc-7.3.0.tar.xz'
   sha256 '832ca6ae04636adbb430e865a1451adf6979ab44ca1c8374f61fba65645ce15c'
 
+  revision 1
+
   # http://sourceware.org/newlib/
   resource 'newlib' do
-    url 'ftp://sourceware.org/pub/newlib/newlib-2.3.0.20160104.tar.gz'
-    sha256 'c92a0e02904bd4fbe1dd416ed94e786c66afbaeae484e4c26be8bb7c7c1e4cd1'
+    url 'ftp://sourceware.org/pub/newlib/newlib-3.0.0.tar.gz'
+    sha256 'c8566335ee74e5fcaeb8595b4ebd0400c4b043d6acb3263ecb1314f8f5501332'
+    patch do
+      url "https://sourceware.org/git/gitweb.cgi?p=newlib-cygwin.git;a=patch;h=b7e0f286a2ecab3b687ec9b3f95f5a88b9f85310"
+      sha256 "641978987fcfc9fc5c529192f34771db44d3257f95bc682da16e8351356177cf"
+    end
+    patch do
+      url "https://sourceware.org/git/gitweb.cgi?p=newlib-cygwin.git;a=patch;h=b8272e3b8df8337744423e4dd23e727cf963d528"
+      sha256 "2be98412600b8d62b4f1456e95ae4bc3b7a6810981d3fde49fad1f42df0c49da"
+    end
   end
 
   depends_on 'gmp'
