@@ -6,7 +6,7 @@ class ArmNoneEabiGcc < Formula
   mirror 'https://gcc.gnu.org/pub/gcc/releases/gcc-7.3.0/gcc-7.3.0.tar.xz'
   sha256 '832ca6ae04636adbb430e865a1451adf6979ab44ca1c8374f61fba65645ce15c'
 
-  revision 1
+  revision 2
 
   # http://sourceware.org/newlib/
   resource 'newlib' do
@@ -93,6 +93,7 @@ class ArmNoneEabiGcc < Formula
             "--enable-newlib-nano-malloc",
             "--disable-newlib-unbuf-stream-opt",
             "--enable-lite-exit",
+            "--enable-target-optspace",
 
             "--with-gmp=#{Formula["gmp"].opt_prefix}",
             "--with-mpfr=#{Formula["mpfr"].opt_prefix}",
