@@ -31,6 +31,12 @@ class ArmNoneEabiGcc < Formula
 
   option 'disable-cxx', 'Don\'t build the g++ compiler'
 
+  # isl 0.20 compatibility
+  # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=86724
+  # Taken from homebrew-core/gcc:
+  # https://github.com/Homebrew/homebrew-core/blob/master/Formula/gcc.rb#L11
+  patch :DATA
+
   patch do
     url "https://git.archlinux.org/svntogit/community.git/plain/trunk/enable-with-multilib-list-for-arm.patch?h=packages/arm-none-eabi-gcc&id=4a12b574e51d8f0be69feb5e37986ca828eaca04"
     sha256 "9447a8fd40d7c1e238b8e9790b739492de5feaa489d61f4ecdab863e5ea1975a"
@@ -132,3 +138,17 @@ class ArmNoneEabiGcc < Formula
     system "#{bin}/arm-none-eabi-gcc", "-o", "noop", "-nostartfiles", "noop.c"
   end
 end
+
+__END__
+diff --git a/gcc/graphite.h b/gcc/graphite.h
+index 4e0e58c..be0a22b 100644
+--- a/gcc/graphite.h
++++ b/gcc/graphite.h
+@@ -37,6 +37,8 @@ along with GCC; see the file COPYING3.  If not see
+ #include <isl/schedule.h>
+ #include <isl/ast_build.h>
+ #include <isl/schedule_node.h>
++#include <isl/id.h>
++#include <isl/space.h>
+
+ typedef struct poly_dr *poly_dr_p;
