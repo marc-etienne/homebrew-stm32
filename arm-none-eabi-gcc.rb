@@ -2,24 +2,14 @@ require 'formula'
 
 class ArmNoneEabiGcc < Formula
   homepage 'http://www.gnu.org/software/gcc/gcc.html'
-  url 'https://ftpmirror.gnu.org/gcc/gcc-7.3.0/gcc-7.3.0.tar.xz'
-  mirror 'https://gcc.gnu.org/pub/gcc/releases/gcc-7.3.0/gcc-7.3.0.tar.xz'
-  sha256 '832ca6ae04636adbb430e865a1451adf6979ab44ca1c8374f61fba65645ce15c'
-
-  revision 2
+  url 'https://ftpmirror.gnu.org/gcc/gcc-9.2.0/gcc-9.2.0.tar.xz'
+  mirror 'https://gcc.gnu.org/pub/gcc/releases/gcc-9.2.0/gcc-9.2.0.tar.xz'
+  sha256 'ea6ef08f121239da5695f76c9b33637a118dcf63e24164422231917fa61fb206'
 
   # http://sourceware.org/newlib/
   resource 'newlib' do
-    url 'ftp://sourceware.org/pub/newlib/newlib-3.0.0.tar.gz'
-    sha256 'c8566335ee74e5fcaeb8595b4ebd0400c4b043d6acb3263ecb1314f8f5501332'
-    patch do
-      url "https://sourceware.org/git/gitweb.cgi?p=newlib-cygwin.git;a=patch;h=b7e0f286a2ecab3b687ec9b3f95f5a88b9f85310"
-      sha256 "641978987fcfc9fc5c529192f34771db44d3257f95bc682da16e8351356177cf"
-    end
-    patch do
-      url "https://sourceware.org/git/gitweb.cgi?p=newlib-cygwin.git;a=patch;h=b8272e3b8df8337744423e4dd23e727cf963d528"
-      sha256 "2be98412600b8d62b4f1456e95ae4bc3b7a6810981d3fde49fad1f42df0c49da"
-    end
+    url 'ftp://sourceware.org/pub/newlib/newlib-3.1.0.tar.gz'
+    sha256 'fb4fa1cc21e9060719208300a61420e4089d6de6ef59cf533b57fe74801d102a'
   end
 
   depends_on 'gmp'
@@ -30,11 +20,6 @@ class ArmNoneEabiGcc < Formula
   depends_on 'arm-none-eabi-binutils'
 
   option 'disable-cxx', 'Don\'t build the g++ compiler'
-
-  patch do
-    url "https://git.archlinux.org/svntogit/community.git/plain/trunk/enable-with-multilib-list-for-arm.patch?h=packages/arm-none-eabi-gcc&id=4a12b574e51d8f0be69feb5e37986ca828eaca04"
-    sha256 "9447a8fd40d7c1e238b8e9790b739492de5feaa489d61f4ecdab863e5ea1975a"
-  end
 
   # Fix parallel build on APFS filesystem
   # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=81797
@@ -66,7 +51,7 @@ class ArmNoneEabiGcc < Formula
 
             "--enable-multilib",
             "--enable-interwork",
-            "--with-multilib-list=armv6-m,armv7-m,armv7e-m,armv7-r,armv7-a",
+            "--with-multilib-list=aprofile,rmprofile",
             "--enable-languages=#{languages.join(',')}",
             "--with-gnu-as",
             "--with-gnu-ld",
