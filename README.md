@@ -7,9 +7,9 @@ Moreover, it does not use any prebuilt package such as those found at https://la
 
 Current Versions
 ----------------
-- gcc 7.3.0
+- gcc 9.2.0
 - binutils 2.30
-- newlib 3.0.0
+- newlib 3.1.0
 
 Installing Homebrew-stm32 Formulae
 --------------------------------
